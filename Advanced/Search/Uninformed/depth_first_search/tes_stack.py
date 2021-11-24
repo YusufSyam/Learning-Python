@@ -1,13 +1,3 @@
-# stack= []
-#
-# stack.append(8)
-# stack.append(10)
-# stack.pop()
-#
-# stack.append(10)
-# stack.pop(0)
-# print(stack)
-
 import numpy as np
 
 a= np.array([])
