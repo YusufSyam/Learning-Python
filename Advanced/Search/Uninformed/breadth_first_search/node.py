@@ -11,13 +11,12 @@ class node:
 
     def get_data(self):
         return self.__data
-
-    def add_adjacent(self, node):
+    
+    def add_adjacent(self, node, first_addition=True):
         self.__adjacent.append(node)
-        node.added_as_adjacent(self)
 
-    def added_as_adjacent(self, node):
-        self.__adjacent.append(node)
+        if(first_addition):
+            node.add_adjacent(self, first_addition= False)
 
     def through_node(self, node):
         node.add_traversed_before(self)
