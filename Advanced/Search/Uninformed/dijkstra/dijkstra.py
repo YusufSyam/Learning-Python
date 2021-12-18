@@ -1,12 +1,19 @@
-from numpy import array, append, delete
+# Importing our diy node-with-distance-for-each-adjacent class
 from cost_node import cost_node as node
+
+# For organizing visited node
+from numpy import array, append
+
+# For displaying the dijkstra table
 from pandas import DataFrame
 
 class dijkstra:
-    # Make dijkstra table
+
+    # Make dijkstra table class, where we store and process information
     class my_dijkstra_table:
 
-        # Make dikstra table row class
+        # Make dikstra table row class, that has node, shortest distance from start node,
+        # Previous node (node that gives the shortest distance), and a boolean is visited or not
         class my_dijkstra_table_row:
             def __init__(self, node, shortest_distance, prev_node):
                 self.node= node
@@ -14,25 +21,43 @@ class dijkstra:
                 self.prev_node = prev_node
                 self.is_visited= False
 
+            # Function to change the is_visited state
             def visited(self):
                 self.is_visited= True
 
             def unvisiting(self):
                 self.is_visited= False
 
-        def __init__(self, node):
+        # Constructor of dijkstra table, we can define the start node here
+        def __init__(self, start_node=None):
+            # Initializing dictionary where we put our dijkstra table row classes
+            # The nodes will be the key even though we still store the node on the value which is the dijkstra table row class
             self.__rows= {}
-            self.__add_row(node, 0)
 
-        # Make a function ro arrange a node, wether to add them to the table, update it, or ignore it
+            # Check if the start_node provided on the parameter is not none
+            if start_node is not None:
+                # Check wether the start node is a node, if so then we add that node as a dijkstra table row with 0 distance
+                if not isinstance(start_node, node):
+                    print('Start node is not a node')
+                    return
+                else:
+                    self.__add_row(node, 0)
+
+
+        # Make a function to arrange a node, wether to add them to the table, update it, or ignore it
         def arrange_node(self, node, distance=None, prev_node=None, echo=False):
+            # If node is not in the row yet, then add it
             if(not self.is_node_in_table(node)):
                 self.__add_row(node, distance, prev_node, echo)
+
+            # If node is already in the row, and the distance parameter is smaller than its current distance,
+            # Then update the distance as well as the previous node
             elif(distance<self.__rows[node].shortest_distance):
                 self.__update_row(node, distance, prev_node, echo)
 
         # Function to add row
         def __add_row(self, node, shortest_distance, prev_node=None, echo= False):
+            # Echo is parameter to decide wether to print the current state/process or not
             if(echo):
                 print(f'Adding {node.get_data()} with {shortest_distance} distance to dijkstra table..')
             self.__rows[node]= self.my_dijkstra_table_row(node, shortest_distance, prev_node)
@@ -46,42 +71,55 @@ class dijkstra:
 
         # Function to get the nearest row left
         def get_nearest_row(self):
+            # First we define the distance and node, with value None, on most theory, we set the distance with a very big number or infinity
+            # But for simplicity we can just fill it with None and then threat None value the same as we threat infinity number on the theory
             distance= None
+
+            # node here will be filled and referred to the node with the smallest distance
             node= None
 
+            # Looping for getting the shortest distance among unvisited node
             for i in self.__rows.keys():
                 if(not self.__rows[i].is_visited):
                     if(distance is None or self.__rows[i].shortest_distance<distance):
                         node= self.__rows[i].node
                         distance= self.__rows[i].shortest_distance
 
+            # Return the node and it's distance, there is possibility that node and distance is None
+            # In which case there is no more unvisited node on the dijkstra table
             return node, distance
 
+        # Function to set visiting node of a row is true
         def visiting_node(self, node):
             self.__rows[node].visited()
 
+        # Function to unvisit all the rows on the table
         def clear_visiting_history(self):
             for i in self.__rows.keys():
                 self.__rows[i].unvisiting()
 
+        # Function to check if there is a row contain certain node on the table
         def is_node_in_table(self, node):
             if(node in self.__rows.keys()):
                 return True
             else:
                 return False
 
+        # Function to get the previous row from a row contain the given node
         def get_previous_row(self, node):
             if(self.is_node_in_table(node)):
                 return self.__rows[node].prev_node
             else:
                 return None
 
+        # Function to get row's cost / shortest distance
         def get_rows_cost(self, node):
             if(self.is_node_in_table(node)):
                 return self.__rows[node].shortest_distance
             else:
                 return None
 
+        # Function to get table as 2d array
         def get_table_row_list(self):
             raw_rows= []
 
@@ -101,32 +139,45 @@ class dijkstra:
             return raw_rows
 
 
+    # Constructor of dijkstra, if start node is provided and is a node, then add it as a start node
     def __init__(self, start_node=None, echo=False):
+        # Make an empty array where we will put the visited node later
         self.__visited_node = array([])
-        self.__dijkstra_table= self.my_dijkstra_table(start_node)
 
+        # Check if start node is provided on the parameter and if the start node is an instance of node
         if (start_node is not None):
             if (not isinstance(start_node, node)):
                 print('Start node is not a node')
                 return
 
+        # Make an instance of dijkstra table
+        self.__dijkstra_table= self.my_dijkstra_table(start_node)
+
         self.__start_node= start_node
         self.__echo = echo
 
-    def set_start(self, start_node):
-        if (not isinstance(start_node, node)):
-            print('Start node is not a node')
-            return
+    # def set_start(self, start_node):
+    #     if (not isinstance(start_node, node)):
+    #         print('Start node is not a node')
+    #         return
+    #
+    #     self.__start_node= start_node
 
-        self.__start_node= start_node
-
-    def search_shortest_path(self, node):
+    # Function to search the shortest path from start to goal by going through all connected nodes around
+    def search_shortest_path(self, goal):
+        # Empty the visited node array so this function can be used repeatedly
         self.__visited_node= array([])
         self.__dijkstra_table.clear_visiting_history()
 
+        # First we traverse through all nodes on the graph and
+        # Calculate the shortest distance between start node and all nodes
         self.traverse()
-        traversed_node, total_cost= self.find_the_path(node)
 
+        # Now on the dijkstra table all row except start node has the prev node,
+        # Based on that we backtracking from the goal to start node by the following function
+        traversed_node, total_cost= self.find_the_path(goal)
+
+        # If node searched is on the graph, then print the shortest path as well as the total cost / distance
         if traversed_node is not None and total_cost is not None:
             print(f'The shortest path: {self.backtrack(traversed_node)}')
             print(f'Total cost / distance: {total_cost}')
