@@ -184,7 +184,7 @@ class dijkstra:
         else:
             print('Data is not found on the graph')
 
-
+    # Function for traversing all nodes on the graph
     def traverse(self):
         while(self.__dijkstra_table.get_nearest_row() is not None):
             curr_node, curr_distance= self.__dijkstra_table.get_nearest_row()
