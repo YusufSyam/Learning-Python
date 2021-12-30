@@ -186,17 +186,20 @@ class dijkstra:
 
     # Function for traversing all nodes on the graph
     def traverse(self):
+        # Will keep looping until there is no more nearest node or unvisited node
         while(self.__dijkstra_table.get_nearest_row() is not None):
+            # First we get current nearest node (row on the dijkstra table) and it's distance
             curr_node, curr_distance= self.__dijkstra_table.get_nearest_row()
-
+            
+            # If curr node is None, return from the function (?)
             if(curr_node is None):
                 if(self.__echo):
                     print('<--- All nodes in graph has been traversed --->')
                 return
-
+            
             if(self.__echo):
                 print(f'Visiting {curr_node.get_data()} :')
-
+            
             self.__dijkstra_table.visiting_node(curr_node)
             self.__visited_node = append(self.__visited_node, curr_node)
 
