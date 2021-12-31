@@ -200,7 +200,10 @@ class dijkstra:
             if(self.__echo):
                 print(f'Visiting {curr_node.get_data()} :')
             
+            # Mark current row (curr_node) as visited row on the dijsktra table
             self.__dijkstra_table.visiting_node(curr_node)
+            
+            #
             self.__visited_node = append(self.__visited_node, curr_node)
 
             for adj_node in curr_node.adjacent_cost_list:
