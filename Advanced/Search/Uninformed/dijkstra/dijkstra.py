@@ -205,7 +205,8 @@ class dijkstra:
             
             # Mark current row (curr_node) as visited row on the visited_node array
             self.__visited_node = append(self.__visited_node, curr_node)
-
+            
+            # Looping through all adjacent node from the current node
             for adj_node in curr_node.adjacent_cost_list:
                 if(adj_node[0] not in self.__visited_node):
                     curr_adj_node= adj_node[0]
