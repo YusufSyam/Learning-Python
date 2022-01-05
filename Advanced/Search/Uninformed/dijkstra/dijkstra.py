@@ -206,8 +206,14 @@ class dijkstra:
             # Mark current row (curr_node) as visited row on the visited_node array
             self.__visited_node = append(self.__visited_node, curr_node)
             
+            # Why do we have 2 different visited node array? because \\ ... \\
+            
             # Looping through all adjacent node from the current node
             for adj_node in curr_node.adjacent_cost_list:
+                
+                # Since curr_node.adjacent_cost_list returns array contains a node and it cost,
+                # We put adj_node first element (which is the node) into condition
+                # If the current adjacent node is not visited yet
                 if(adj_node[0] not in self.__visited_node):
                     curr_adj_node= adj_node[0]
                     curr_cost= adj_node[1] + curr_distance
