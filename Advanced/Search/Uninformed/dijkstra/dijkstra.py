@@ -215,6 +215,8 @@ class dijkstra:
                 # We put adj_node first element (which is the node) into condition
                 # If the current adjacent node is not visited yet
                 if(adj_node[0] not in self.__visited_node):
+                    
+                    # Now we define current adjacent node and it's cost
                     curr_adj_node= adj_node[0]
                     curr_cost= adj_node[1] + curr_distance
 
@@ -228,7 +230,8 @@ class dijkstra:
                             curr_node_data = curr_node.get_data()
 
                         print(f'Looking {curr_adj_node_data} from {curr_node_data}')
-
+                       
+                    # And then we sent them to dijkstra table to find the right action for this node
                     self.__dijkstra_table.arrange_node(curr_adj_node, curr_cost, curr_node, self.__echo)
 
 
