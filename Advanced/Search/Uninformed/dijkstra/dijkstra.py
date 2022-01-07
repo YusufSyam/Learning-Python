@@ -237,6 +237,9 @@ class dijkstra:
     
     # Function to get the shortest path from start to end
     def find_the_path(self, node):
+        # This function will return the goal node and its total cost from start node
+        # First we make a condition, if the goal/searched node is on the graph, then do the statement below,
+        # If else, then return None and None
         if(self.__dijkstra_table.is_node_in_table(node)):
             traversed_node= [node]
             total_cost= self.__dijkstra_table.get_rows_cost(node)
