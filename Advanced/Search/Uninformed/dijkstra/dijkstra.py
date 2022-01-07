@@ -234,7 +234,8 @@ class dijkstra:
                     # And then we sent them to dijkstra table to find the right action for this node
                     self.__dijkstra_table.arrange_node(curr_adj_node, curr_cost, curr_node, self.__echo)
 
-
+    
+    # Function to get the shortest path from start to end
     def find_the_path(self, node):
         if(self.__dijkstra_table.is_node_in_table(node)):
             traversed_node= [node]
