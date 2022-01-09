@@ -219,7 +219,8 @@ class dijkstra:
                     # Now we define current adjacent node and it's cost
                     curr_adj_node= adj_node[0]
                     curr_cost= adj_node[1] + curr_distance
-
+                    
+                    # Condition to print the current process
                     if (self.__echo):
                         curr_adj_node_data = curr_adj_node
                         if curr_adj_node is not None:
@@ -241,6 +242,8 @@ class dijkstra:
         # First we make a condition, if the goal/searched node is on the graph, then do the statement below,
         # If else, then return None and None
         if(self.__dijkstra_table.is_node_in_table(node)):
+            
+            # First we make an array to put all the traversed node, the first elemen is the node from parameter which is the goal node
             traversed_node= [node]
             total_cost= self.__dijkstra_table.get_rows_cost(node)
 
