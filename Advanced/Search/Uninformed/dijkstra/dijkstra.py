@@ -245,6 +245,8 @@ class dijkstra:
             
             # First we make an array to put all the traversed node, the first elemen is the node from parameter which is the goal node
             traversed_node= [node]
+
+            # Then we get the total cost from start to goal
             total_cost= self.__dijkstra_table.get_rows_cost(node)
 
             curr_node= node
