@@ -273,12 +273,15 @@ class dijkstra:
 
                 # Add the prev_node to the traversed_node array
                 traversed_node.append(prev_node)
-
+            
+            # Reverse the array
             traversed_node.reverse()
-
+            
+            # Return both traversed node and it's cost
             return traversed_node, total_cost
 
         else:
+            # Return both none
             return None, None
 
     def show_dijkstra_table(self):
