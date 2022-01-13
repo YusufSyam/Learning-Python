@@ -249,18 +249,29 @@ class dijkstra:
             # Then we get the total cost from start to goal
             total_cost= self.__dijkstra_table.get_rows_cost(node)
 
+            # Set the node as current node
             curr_node= node
+            
+            # Set the previous node
             prev_node= self.__dijkstra_table.get_previous_row(curr_node)
 
+            # Append the previous node to the traversed_node array
             traversed_node.append(prev_node)
-
+            
+            # Looping until there is no previous node anymore
             while(True):
+                
+                # Set current node with prev_node
                 curr_node= prev_node
+                
+                # Set prev_node with current_node's previous node
                 prev_node= self.__dijkstra_table.get_previous_row(curr_node)
-
+                
+                # If prev_node is none, then break the loop
                 if(prev_node is None):
                     break
 
+                # Add the prev_node to the traversed_node array
                 traversed_node.append(prev_node)
 
             traversed_node.reverse()
