@@ -286,9 +286,13 @@ class dijkstra:
     
     # Function to show the dijkstra table as pandas dataframe
     def show_dijkstra_table(self):
+        # First we get table row as list
         row_list= self.__dijkstra_table.get_table_row_list()
-
+        
+        # Define the data as well as the columns 
         table= DataFrame(data=row_list, columns=['Node', 'Shortest Distance from Start', 'Prev Node'])
+        
+        # Print the table dataframe
         print(table)
     
     # Function to return a string contains the way from goal to start
