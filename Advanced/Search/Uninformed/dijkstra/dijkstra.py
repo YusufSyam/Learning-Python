@@ -283,13 +283,15 @@ class dijkstra:
         else:
             # Return both none
             return None, None
-
+    
+    # Function to show the dijkstra table as pandas dataframe
     def show_dijkstra_table(self):
         row_list= self.__dijkstra_table.get_table_row_list()
 
         table= DataFrame(data=row_list, columns=['Node', 'Shortest Distance from Start', 'Prev Node'])
         print(table)
-
+    
+    # Function to return a string contains the way from goal to start
     def backtrack(self, traversed_node):
         temp_string = ''
 
