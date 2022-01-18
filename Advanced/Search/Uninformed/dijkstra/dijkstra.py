@@ -297,6 +297,7 @@ class dijkstra:
     
     # Function to return a string contains the way from goal to start
     def backtrack(self, traversed_node):
+        # Make an empty string
         temp_string = ''
 
         for i in traversed_node:
