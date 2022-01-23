@@ -299,7 +299,8 @@ class dijkstra:
     def backtrack(self, traversed_node):
         # Make an empty string
         temp_string = ''
-
+        
+        # Looping through traversed node
         for i in traversed_node:
             temp_string += i.get_data()
 
