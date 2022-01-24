@@ -302,6 +302,8 @@ class dijkstra:
         
         # Looping through traversed node
         for i in traversed_node:
+            
+            # Concat the temp string with node and string arrow '<-'
             temp_string += i.get_data()
 
             if i != traversed_node[-1]:
