@@ -308,5 +308,6 @@ class dijkstra:
 
             if i != traversed_node[-1]:
                 temp_string += ' -> '
-
+        
+        # Return the temp_string that contains backtrack information
         return temp_string
