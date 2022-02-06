@@ -34,5 +34,7 @@ def minion_game(string):
         print('Kevin '+str(kevin_score))
     else:
         print('Draw')
-
-    
+        
+if __name__ == '__main__':
+    s = input()
+    minion_game(s)
