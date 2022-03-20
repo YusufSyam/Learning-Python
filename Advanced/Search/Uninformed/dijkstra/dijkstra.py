@@ -41,7 +41,7 @@ class dijkstra:
                     print('Start node is not a node')
                     return
                 else:
-                    self.__add_row(node, 0)
+                    self.__add_row(start_node, 0)
 
 
         # Make a function to arrange a node, wether to add them to the table, update it, or ignore it
