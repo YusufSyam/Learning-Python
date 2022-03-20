@@ -23,14 +23,7 @@ grid= '''0 0 0 0 0 1 0 0
 0 0 0 2 0 0 0 0'''.split('\n')
 
 grid= [[int(j) for j in i.split(' ')] for i in grid]
-
-node_list= []
-for i in range(m):
-    temp_list= []
-    for j in range(n):
-        append_node= node(f'{i},{j}')
-        temp_list.append(append_node)
-    node_list.append(temp_list)
+node_list= [[node(f'{i},{j}') for j in range(n)]for i in range(m)]
 
 shortcut_list= {}
 for i in range(m):
