@@ -148,8 +148,18 @@ class heap:
         # print(f'Data existed: {self.node_dict[existed_node_data.index(data)+1].data}')
 
     def sorting_deleted_node(self, justify_node):
-        # TODO
-        pass
+        curr_node= justify_node
+        while True:
+            left_child= curr_node.left
+            right_child= curr_node.right
+
+            if left_child is None and right_child is None:
+                break
+
+            curr_node_position= curr_node.position
+            curr_node_parent= curr_node.parent
+            curr_node_left= curr_node.left
+            curr_node_right= curr_node.right
 
     def get_top_node_position(self, n= None):
         if n is None:
